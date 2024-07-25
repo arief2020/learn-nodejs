@@ -1,4 +1,5 @@
 import CategoriesModel from "@/models/category.model";
+import ProductsModel from "@/models/product.model";
 import { Request, Response } from "express";
 
 export default {
@@ -87,6 +88,39 @@ export default {
       res.status(500).json({
         data: err.message,
         message: "Failed delete category",
+      });
+    }
+  },
+
+  // async findProductsByCategoryId(req: Request, res: Response) {
+  //   try {
+  //     const result = await CategoriesModel.find({
+  //       _id: req.params.id,
+  //     }).populate("products");
+  //     res.status(200).json({
+  //       data: result,
+  //       message: "Success get one category",
+  //     });
+  //   } catch (error) {
+  //     const err = error as Error;
+  //     res.status(500).json({
+  //       data: err.message,
+  //       message: "Failed get one category",
+  //     });
+  //   }
+  // },
+  async findProductsByCategoryId(req: Request, res: Response) {
+    try {
+      const result = await ProductsModel.find({categoryId: req.params.id}).populate("categoryId");
+      res.status(200).json({
+        data: result,
+        message: "Success get all products by category",
+      });
+    } catch (error) {
+      const err = error as Error;
+      res.status(500).json({
+        data: err.message,
+        message: "Failed get all products by category",
       });
     }
   },

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const CategoriesSchema = new Schema(
+const CategorySchema = new Schema(
   {
     name: {
       type: String,
@@ -14,6 +14,6 @@ const CategoriesSchema = new Schema(
   }
 );
 
-const CategoriesModel = mongoose.model("Categories", CategoriesSchema);
+const CategoriesModel = mongoose.model("Category", CategorySchema);
 
 export default CategoriesModel;
