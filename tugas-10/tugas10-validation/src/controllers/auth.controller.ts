@@ -100,7 +100,7 @@ export default {
       }
 
       const token = jwt.sign(
-        { id: userByEmail._id, role: userByEmail.role },
+        { id: userByEmail._id, roles: userByEmail.roles },
         SECRET,
         {
           expiresIn: "6h",
@@ -128,7 +128,7 @@ export default {
     }
   },
   async register(req: Request, res: Response) {
-    const { fullName, username, email, password } = req.body;
+    const { fullName, username, email, password, roles = ["user"] } = req.body;
     try {
       await validateRegisterSchema.validate({
         fullName,
@@ -142,7 +142,7 @@ export default {
         username,
         email,
         password,
-        role: "user", // default role
+        roles,
       });
       res.json({
         message: "User registered successfully",
